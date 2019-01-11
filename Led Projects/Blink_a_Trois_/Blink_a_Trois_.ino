@@ -4,12 +4,12 @@ void setup()
 {
   for (int i=0; i<3; i++)
   {
-  pinMode(pinLed[i], OUTPUT);
+    pinMode(pinLed[i], OUTPUT);
   }
   
   for (int i=0; i<3; i++)
   {
-  digitalWrite(pinLed[i], LOW);
+    digitalWrite(pinLed[i], LOW);
   }
 
 }
@@ -18,15 +18,18 @@ void loop()
 {
   for (int i=0; i<3; i++)
   {
-  digitalWrite(pinLed[i], HIGH);
-  delay(50);
-  }  
+    digitalWrite(pinLed[i], HIGH);
+    delay(50);
+  } 
+   
   delay(temps);
+  
   for (int i=0; i<3; i++)
   {
-  digitalWrite(pinLed[i], LOW);
-  delay(50);
+    digitalWrite(pinLed[i], LOW);
+    delay(50);
   }
+  
   digitalWrite(pinLed[2], HIGH);
   delay(temps); 
   digitalWrite(pinLed[2], LOW);
