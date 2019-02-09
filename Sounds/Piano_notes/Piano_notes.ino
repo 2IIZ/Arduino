@@ -29,16 +29,19 @@
 #define NOTE_C5  523
 
 
+
 void setup() {
-  //tone(pin, frequency, duration)
-  tone(11, NOTE_C4, T_Noire);
-  tone(11, NOTE_C4, T_Noire);
-  tone(11, NOTE_C4, T_Noire);
   
 
 }
 
 void loop() {
+//tone(pin, frequency, duration)
+  tone(11, NOTE_C4, T_Noire);
+  tone(11, NOTE_D4, T_Noire);
+  tone(11, NOTE_E4, T_Blanche);
 
+  tone(11, NOTE_F4, T_Noire);
+  
 
 }
