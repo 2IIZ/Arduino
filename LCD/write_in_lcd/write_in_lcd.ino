@@ -11,8 +11,8 @@
 
   The circuit:
  * LCD RS pin to digital pin 12
- * LCD Enable pin to digital pin 11
- * LCD D4 pin to digital pin 5
+ * LCD (E)nable pin to digital pin 11
+ * LCD D4 pin to digital pin 5 (DB4)
  * LCD D5 pin to digital pin 4
  * LCD D6 pin to digital pin 3
  * LCD D7 pin to digital pin 2
@@ -40,7 +40,7 @@
 // include the library code:
 #include <LiquidCrystal.h>
 
-char incomingdata[] = {0}; 
+char incomingdata[] = {0};
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
@@ -72,6 +72,5 @@ if (Serial.available())
   //lcd.setCursor(0, 1);
   // print the number of seconds since reset:
   //lcd.print(millis() / 1000);
-  
-}
 
+}
