@@ -7,6 +7,7 @@
 #define FREQUENCY_CLOCK 50 // With Serial.print() // Debug
 
 // Resistances used : 10K Omh for the ground and 100kk Ohm connected to the signal A0
+// LDR use : 0.5cm 
 // IF 1111 or 0000 ->  threshold may be too high or too low
 // if a 0 is read as a 1
 //    - Threshold to low, not enough ambient light 
@@ -21,7 +22,8 @@
 // 40ms ✔
 // 30ms ✔ 
 // 20ms ✔ without Serial.print() = 120ms for 4 bits
-//
+// 10ms ?
+// 5ms ?
 // Max ambientLight light should be 170 units
 //  TODO : Make a led warning light
 // ⚠No Direct LED Light at sensor. Error in transmission.
