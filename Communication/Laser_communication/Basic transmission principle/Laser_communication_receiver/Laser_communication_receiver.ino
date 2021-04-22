@@ -19,11 +19,11 @@
 // 60ms ✔ 
 // 50ms ✔ = 250ms for 4 bits
 // 40ms ✔
-// 30ms ✔
-// 20ms ✔ without Serial.print()
+// 30ms ✔ 
+// 20ms ✔ without Serial.print() = 120ms for 4 bits
 //
 // Max ambientLight light should be 170 units
-// TODO : Make a led warning light
+//  TODO : Make a led warning light
 // ⚠No Direct LED Light at sensor. Error in transmission.
 // Works at 213cm
 
