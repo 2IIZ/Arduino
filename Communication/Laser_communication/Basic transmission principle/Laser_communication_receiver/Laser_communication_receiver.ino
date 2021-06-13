@@ -1,10 +1,10 @@
 #define SOLARPIN A0
-
+#define hitSignalPlayerOne 8
+#define hitSignalPlayerTwo 9
 #define NUM_SAMPLES 10
-#define THRESHOLD 120
-#define BITS 4
-//#define FREQUENCY_CLOCK 20
-#define FREQUENCY_CLOCK 50 // With Serial.print() // Debug
+#define BITS 3
+#define FREQUENCY_CLOCK 20
+//#define FREQUENCY_CLOCK 50 // With Serial.print() // Debug
 
 // Resistances used : 10K Omh for the ground and 100kk Ohm connected to the signal A0
 // LDR use : 0.5cm 
@@ -34,9 +34,14 @@ int ambientLight = 0;
 int averageLight;
 int bits[BITS];
 int readingA0;
+int THRESHOLD = 120;
 
 void setup() {
   pinMode(SOLARPIN, INPUT);
+  pinMode(hitSignalPlayerOne, OUTPUT);
+  digitalWrite(hitSignalPlayerOne, LOW);
+  pinMode(hitSignalPlayerTwo, OUTPUT);
+  digitalWrite(hitSignalPlayerTwo, LOW);
   Serial.begin(9600);
 
   ambientLight = analogRead(SOLARPIN);
@@ -48,6 +53,9 @@ void setup() {
 
 void loop() {
   readingA0 = analogRead(SOLARPIN);
+
+//  Serial.print("readingA0 : ");
+//  Serial.println(readingA0);
  
   // listen to the start bit
   if(readingA0 > averageLight + THRESHOLD){
@@ -57,10 +65,12 @@ void loop() {
       for(int i = 0; i < BITS; i++) {
         readingA0 = analogRead(SOLARPIN);
         // Comment this for 20ms response
-        Serial.print("AVERAGE : ");
-        Serial.println(averageLight);
-        Serial.print("readingA0 : ");
-        Serial.println(readingA0);
+//        Serial.print("AVERAGE : ");
+//        Serial.println(averageLight);
+//        Serial.print("THRESHOLD : ");
+//        Serial.println(THRESHOLD);
+//        Serial.print("readingA0 : ");
+//        Serial.println(readingA0);
         // ============================
         if(readingA0 > averageLight + THRESHOLD){
           bits[i] = 1;
@@ -85,9 +95,20 @@ void loop() {
       Serial.print(bits[i]);
     }
     Serial.println("");
-    
-    if(bits[0] == 0 && bits[1] == 0 && bits[2] == 0 && bits[3] == 1){
+
+    // 001
+    if(bits[0] == 0 && bits[1] == 0 && bits[2] == 1){
       Serial.print("Player 1 hit the target");
+      digitalWrite(hitSignalPlayerOne, HIGH);
+      delay(500);
+      digitalWrite(hitSignalPlayerOne, LOW);
+    }
+    // 010
+    if(bits[0] == 0 && bits[1] == 1 && bits[2] == 0){
+      Serial.print("Player 2 hit the target");
+      digitalWrite(hitSignalPlayerTwo, HIGH);
+      delay(500);
+      digitalWrite(hitSignalPlayerTwo, LOW);
     }
   }
 
@@ -96,7 +117,12 @@ void loop() {
 //    bits[i] = 0;
 //  }
 
-
+  if(averageLight < 70){
+    THRESHOLD = 250;
+  } else {
+    THRESHOLD = 120;
+  }
+ 
   averageLight = approxRollingAverage(averageLight, readingA0);
 }
 
